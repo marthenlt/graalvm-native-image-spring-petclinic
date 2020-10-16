@@ -6,7 +6,7 @@ This repo is working and has been tested with GraalVM Enterprise v20.2.0 for JDK
 2. Ubuntu 20.4 LTS
 3. Fedora 32
 
-To build just execute shell script
+To build the Native Image binary executable of Petclinic, you just need to execute shell script
 ```
 ./build.sh
 ```
