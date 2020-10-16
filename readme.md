@@ -6,17 +6,17 @@ This repo is working and has been tested with GraalVM Enterprise v20.2.0 for JDK
 2. Ubuntu 20.4 LTS
 3. Fedora 32
 
-To build the Native Image binary executable of Petclinic, you just need to execute shell script
+To build Native Image binary executable of Petclinic, you just need to execute shell script
 ```
 ./build.sh
 ```
 
-It also provide multi-stage docker builds. However the compile time is longer
+I also provide multi-stage docker builds should you are running on macOS (like myself) to target Linux OS. However the compile time is way longerrrrrr..
 ```
 ./build-on-docker.sh
 ```
 
-Enjoy the lightning speed start up time :-)
+Enjoy the lightning speed start up time of native image Petclinic :-)
 
 
 Thanks,
