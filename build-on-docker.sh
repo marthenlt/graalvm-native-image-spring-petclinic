@@ -2,4 +2,4 @@
 
 mvn package -DskipTests
 
-docker build -t marthenl/petclinic-mysql-native-image:0.3 .
+docker build -f Dockerfile-multistage -t marthenl/petclinic-mysql-native-image:0.4 .

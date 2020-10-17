@@ -1,35 +1,6 @@
-FROM oracle/graalvm-ce:20.2.0-java8 as graalvm
-RUN yum install wget -y \
-    && gu install native-image \
-    && mkdir -p /home/app
-
-COPY . /home/app/petclinic
-WORKDIR /home/app/petclinic
-
-RUN wget https://apachemirror.sg.wuchna.com/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz \
-    && tar -xzf apache-maven-3.6.3-bin.tar.gz \
-    && export PATH=$PATH:apache-maven-3.6.3/bin \
-    && ./build.sh
-
-FROM alpine:latest
-
+FROM oracle/graalvm-ce:20.2.0-java8
 MAINTAINER Marthen Luther <marthen.luther@oracle.com>
-
-ENV MYSQL_HOST=mysql-external-service \
-    GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc \
-    GLIBC_VERSION=2.29-r0 \
-    LANG=C.UTF-8
-
-RUN apk -U upgrade \
-        && apk add libstdc++ bash curl \
-        && for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION} glibc-i18n-${GLIBC_VERSION}; do curl -sSL ${GLIBC_REPO}/releases/download/${GLIBC_VERSION}/${pkg}.apk -o /tmp/${pkg}.apk; done \
-        && apk add --allow-untrusted /tmp/*.apk \
-        && rm -v /tmp/*.apk \
-        && echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh  \
-        && /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib
-
+ENV MYSQL_HOST=mysql-external-service
+COPY target/petclinic-jpa .
 EXPOSE 8080
-
-COPY --from=graalvm /home/app/petclinic/target/petclinic-jpa .
-
 ENTRYPOINT ["/petclinic-jpa"]
