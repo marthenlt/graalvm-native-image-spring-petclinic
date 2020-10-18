@@ -6,4 +6,4 @@ NC='\033[0m'
 printf "=== ${BLUE}Building %s sample${NC} ===\n" "${PWD##*/}"
 ./compile.sh
 
-docker build -t marthenl/petclinic-mysql-native-image:0.5 .
+docker build -t marthenl/petclinic-mysql-native-image:0.6 .

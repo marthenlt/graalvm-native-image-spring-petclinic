@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: petclinic-knative-serving
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        # Standard Knative based autoscaling.
+        autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
+        # if minScale is set, then enable-scale-to-zero is false
+        autoscaling.knative.dev/minScale: 1
+        # Max pods created
+        autoscaling.knative.dev/maxScale: 3
+        # Target 10 in-flight-requests per pod
+        autoscaling.knative.dev/target: "10"
+        # Standard Kubernetes CPU-based autoscaling.
+        #autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+        #autoscaling.knative.dev/metric: cpu
+    spec:
+      containers:
+        - image: marthenl/petclinic-mysql-native-image:0.6
+---
