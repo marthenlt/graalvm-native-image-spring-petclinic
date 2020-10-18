@@ -6,7 +6,7 @@ ALTER DATABASE petclinic
 
 --GRANT ALL PRIVILEGES ON petclinic.* TO 'petclinic@%' IDENTIFIED BY 'petclinic';
 
-create user 'petclinic'@'%' identified by 'petclinic';
+-- create user 'petclinic'@'%' identified by 'petclinic';
 
 -- For MySQL 8.0, to avoid NPE
 -- java.sql.SQLNonTransientConnectionException: Could not create connection to database server.

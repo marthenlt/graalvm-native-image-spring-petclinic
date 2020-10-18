@@ -10,11 +10,13 @@ spec:
         # Standard Knative based autoscaling.
         autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
         # if minScale is set, then enable-scale-to-zero is false
-        autoscaling.knative.dev/minScale: 1
+        autoscaling.knative.dev/minScale: "1"
         # Max pods created
-        autoscaling.knative.dev/maxScale: 3
+        autoscaling.knative.dev/maxScale: "3"
         # Target 10 in-flight-requests per pod
         autoscaling.knative.dev/target: "10"
+        # The shorter these windows are, the more quickly the Autoscaler will react
+        autoscaling.knative.dev/window: "15s"
         # Standard Kubernetes CPU-based autoscaling.
         #autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
         #autoscaling.knative.dev/metric: cpu
