@@ -6,23 +6,23 @@ spec:
   ports:
     - port: 3306
   selector:
-    app: mysql-external-service
+    app: mysql
   clusterIP: None
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-external-service
+  name: mysql
 spec:
   selector:
     matchLabels:
-      app: mysql-external-service
+      app: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql-external-service
+        app: mysql
     spec:
       containers:
         - image: mysql:8.0

@@ -10,7 +10,7 @@ spec:
         # Standard Knative based autoscaling.
         autoscaling.knative.dev/class: "kpa.autoscaling.knative.dev"
         # if minScale is set, then enable-scale-to-zero is false
-        autoscaling.knative.dev/minScale: "1"
+#        autoscaling.knative.dev/minScale: "1"
         # Max pods created
         autoscaling.knative.dev/maxScale: "3"
         # Target 10 in-flight-requests per pod
@@ -22,5 +22,8 @@ spec:
         #autoscaling.knative.dev/metric: cpu
     spec:
       containers:
-        - image: marthenl/petclinic-mysql-native-image:0.6
+        - image: marthenl/petclinic-mysql-native-image:0.7
+          env:
+          - name: VERSION
+            value: "v0.7"
 ---

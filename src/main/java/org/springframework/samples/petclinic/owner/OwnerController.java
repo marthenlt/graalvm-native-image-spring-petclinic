@@ -125,7 +125,7 @@ class OwnerController {
 
 	@GetMapping("/doscale")
 	public String scaleItUp(Map<String, Object> model) {
-		String localhost = "served from: ";
+		String localhost = "(VERSION: " + System.getenv("VERSION") + ")  ;  served from: ";
 		try {
 			localhost += InetAddress.getLocalHost().getHostName();
 		} catch (UnknownHostException e) {

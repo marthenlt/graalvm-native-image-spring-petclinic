@@ -15,7 +15,8 @@ FROM alpine:latest
 
 MAINTAINER Marthen Luther <marthen.luther@oracle.com>
 
-ENV MYSQL_HOST=mysql-external-service \
+ENV MYSQL_HOST=mysql \
+    VERSION=v0.7 \
     GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc \
     GLIBC_VERSION=2.29-r0 \
     LANG=C.UTF-8
