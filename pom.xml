@@ -60,6 +60,11 @@
                     <groupId>org.javassist</groupId>
                     <artifactId>javassist</artifactId>
                 </exclusion>
+                <!-- Remove Tomcat connection pool to make sure we are using Hikari connection pool -->
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
