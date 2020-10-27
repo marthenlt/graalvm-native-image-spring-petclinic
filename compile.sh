@@ -29,10 +29,15 @@ echo "Compiling $ARTIFACT with $GRAALVM_VERSION"
 { time native-image \
   -H:+TraceClassInitialization \
   -H:+ReportExceptionStackTraces \
+  --enable-all-security-services \
+  -H:IncludeResourceBundles=oracle.net.jdbc.nl.mesg.NLSR,oracle.net.mesg.Message \
+  --allow-incomplete-classpath \
+	--initialize-at-build-time=oracle.net.jdbc.nl.mesg.NLSR_en \
+	--initialize-at-build-time=oracle.jdbc.driver.DynamicByteArray,oracle.sql.ConverterArchive,oracle.sql.converter.CharacterConverterJDBC,oracle.sql.converter.CharacterConverter1Byte \
+	--initialize-at-run-time=java.sql.DriverManager \
   --initialize-at-build-time=java.awt.Toolkit \
   --initialize-at-build-time=sun.awt.AWTAccessor \
   --no-fallback \
-  --allow-incomplete-classpath \
   --report-unsupported-elements-at-runtime \
   --install-exit-handlers \
   --no-server \

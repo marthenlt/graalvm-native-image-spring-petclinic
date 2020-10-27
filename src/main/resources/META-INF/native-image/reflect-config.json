@@ -1,0 +1,70 @@
+[
+  {
+  "name":"oracle.jdbc.OracleDriver",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.driver.DiagnosabilityMXBean",
+  "allPublicMethods":true
+},
+{
+  "name":"oracle.jdbc.driver.Message11",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.driver.OracleDiagnosabilityMBean",
+  "allPublicConstructors":true
+},
+{
+  "name":"oracle.jdbc.driver.T4CDriverExtension",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.annotations.Feature",
+  "methods":[{"name":"values","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.annotations.Supports",
+  "methods":[{"name":"value","parameterTypes":[] }]
+},
+{
+  "name":"oracle.jdbc.logging.runtime.TraceController",
+  "allPublicMethods":true
+},
+{
+  "name":"oracle.net.ano.Ano",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.net.ano.AuthenticationService",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.net.ano.DataIntegrityService",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.net.ano.EncryptionService",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.net.ano.SupervisorService",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"oracle.ons.ONS"
+},
+{
+  "name":"oracle.simplefan.FanManager"
+},
+{
+  "name":"oracle.sql.AnyDataFactory"
+},
+{
+  "name":"oracle.sql.TypeDescriptorFactory"
+},
+{
+  "name":"org.hibernate.dialect.Oracle12cDialect",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+}
+]
