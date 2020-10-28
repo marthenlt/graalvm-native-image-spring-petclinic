@@ -5,9 +5,9 @@ Spring Boot and GraalVM folks have been collaborating to make that integration h
 
 Spring Boot has their spring-graalvm-native experimental project here https://github.com/spring-projects-experimental/spring-graalvm-native 
 
-My repo is fork of it with some enhancements.
+My repo is a fork of it with some additional enhancements.
 
-Below are the enhacements I did.
+Below are the enhacements that I did.
 
 ## Suported Databases
 
