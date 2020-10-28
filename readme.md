@@ -57,11 +57,6 @@ To build Native Image binary executable of Petclinic execute below shell script
 ./compile.sh
 ```
 
-To build Native Image binary executable of Petclinic and create a Docker image of it, you just need to execute shell script
-```
-./build.sh
-```
-
 I also provide multi-stage docker builds should you are running on macOS (like myself) to target Linux OS. However the compile time is way longerrrrrr..
 ```
 ./build-on-docker.sh

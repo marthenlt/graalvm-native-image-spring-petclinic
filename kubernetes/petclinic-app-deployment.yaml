@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
         - name: petclinic-mysql-native-image
-          image: marthenl/petclinic-mysql-native-image:0.7
+          image: marthenl/petclinic-mysql-native-image:0.8
           ports:
             - containerPort: 8080
