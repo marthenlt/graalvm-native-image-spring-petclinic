@@ -1,7 +1,7 @@
 **Demo of Spring Petclinic compiled Ahead of Time via GraalVM Native Image.** 
 
 During interaction with friends, I often get asked GraalVM Native Image support for Spring Boot. 
-Spring Boot and GraalVM have been collaborating to make that integration happening. 
+Spring Boot and GraalVM folks have been collaborating to make that integration happening. 
 
 Spring Boot has their spring-graalvm-native experimental project here https://github.com/spring-projects-experimental/spring-graalvm-native 
 
