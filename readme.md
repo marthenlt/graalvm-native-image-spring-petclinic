@@ -57,7 +57,7 @@ spring.datasource.password=oracle
 spring.datasource.continue-on-error=true
 ```
 
-##Standard JDBC drivers
+## Standard JDBC drivers
 
 I am using a standard JDBC drivers from upstream Maven Central Repository. You can take a look at my ``pom.xml`` file for more detail. 
 
@@ -80,7 +80,7 @@ I am using a standard JDBC drivers from upstream Maven Central Repository. You c
         </dependency>
 ``` 
 
-##Connection Pool
+## Connection Pool
 
 As an addition to supporting multiple databases, this repo is also uses Hikari connection pool which also configured in ``application.properties`` file.
 
@@ -96,7 +96,7 @@ spring.datasource.hikari.connectionTimeout=30000
 spring.datasource.hikari.poolName=HikariPetclinicNativeImage
 ```
 
-##Supported Operating Systems
+## Supported Operating Systems
 
 This repo has been tested with GraalVM Enterprise v20.2.0 for JDK 8 using various OSes:
 1. macOS Catalina 10.15.7
@@ -104,7 +104,7 @@ This repo has been tested with GraalVM Enterprise v20.2.0 for JDK 8 using variou
 3. Ubuntu 20.4 LTS
 4. Fedora 32
 
-##How to Generate Native Image Binary Executable
+## How to Generate Native Image Binary Executable
 
 You will need Maven v3.6.x, GraalVM Enterprise 20.2 for JDK 8 (it should work for GraalVM Community edition too),
 and Native Image prerequisite installed.
@@ -113,7 +113,9 @@ I have wrote a tutorial as part of my previous GraalVM hands-on lab to get your 
 
 Once your environment is native-image-ready, you can start AOT (Ahead of Time) compiling your Petclinic JPA application. 
 
-#####To build Native Image binary executable of Petclinic execute below shell script
+##### Build Native Image binary executable 
+
+Execute below script
 
 ```
 ./compile.sh
@@ -121,7 +123,9 @@ Once your environment is native-image-ready, you can start AOT (Ahead of Time) c
 
 In my Mac the above script took around 9 minutes. So once you execute `compile.sh` script, you can grab a coffee :-)
 
-#####I also provide multi-stage docker builds should you are running on macOS (like myself) to target Alpine Linux OS to produce small base image. 
+##### Build Native Image binary using multi-stage docker build
+
+I also provide multi-stage docker builds should you are running on macOS (like myself) to target Alpine Linux OS to produce small base image. 
 
 ```
 ./build-on-docker.sh
@@ -135,7 +139,7 @@ Once AOT compilation is finished, you can find the Petclinic native binary execu
 You can run it directly ``target/petclinic-jpa`` or via a Docker command or even deployed into Kubernetes cluster.
 
 
-##Deployed the Petclinic Native Binary Executable as Kubernetes standard Pod Deployment
+## Deployed the Petclinic Native Binary Executable as Kubernetes standard Pod Deployment
 
 I have provided necessary Kubernetes deployment descriptors under ``kubernetes`` folder. Here what's inside of ``kubernetes`` folder.
 
@@ -163,7 +167,7 @@ cd kubernetes
 ./deploy-petclinic-native-as-standard-pod.sh 
 ```
 
-##Deployed the Petclinic Native Binary Executable as Knative Service
+## Deployed the Petclinic Native Binary Executable as Knative Service
 
 One of best use case for GraalVM Native Image is lightning start up, because it doesn't need a warm up. It can handle ton of requests almost instantaneously.
 A lightning start up attribute offered by GraalVM Native Image is best suite for Serverless / Function as a Service (FaaS) kind of application.
