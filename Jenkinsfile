@@ -6,7 +6,7 @@ node {
     }
 
     stage('Maven build') {
-        sh 'mvn package -DskipTests'
+        sh './mvnw package -DskipTests'
     }
 
     stage('Build & push image') {
@@ -15,5 +15,5 @@ node {
             app.push()
         }
     }
-    
+
 }
