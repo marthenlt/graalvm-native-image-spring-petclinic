@@ -16,7 +16,7 @@ FROM alpine:latest
 MAINTAINER Marthen Luther <marthen.luther@oracle.com>
 
 ENV MYSQL_HOST=mysql \
-    VERSION=v0.8 \
+    VERSION=v0.9 \
     DO_NOT_INITIALIZE=never \
     ORACLE_HOST=oracle \
     GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc \
