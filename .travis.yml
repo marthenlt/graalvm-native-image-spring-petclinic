@@ -8,13 +8,11 @@ before_install:
   - sudo apt-get install wget build-essential libz-dev zlib1g-dev -y
   - wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-linux-amd64-20.2.0.tar.gz
   - tar zxfv graalvm-ce-java8-linux-amd64-20.2.0.tar.gz
-  - ls -al
   - export GRAALVM_HOME=$TRAVIS_BUILD_DIR/graalvm-ce-java8-20.2.0
   - echo $GRAALVM_HOME
   - export JAVA_HOME=$GRAALVM_HOME
   - export PATH=$PATH:$JAVA_HOME/bin
   - echo $PATH
-  - java -version
   - $GRAALVM_HOME/bin/java -version
   - gu install native-image
 
@@ -23,16 +21,3 @@ script:
 
 notifications:
   email: marthen.luther@oracle.com
-
-
-#before_install:
-#  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-#
-#matrix:
-#  include:
-#    - env: JDK='GraalVM 20.2.0'
-#      install: . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz"
-#
-#script:
-#  - ./build-on-docker.sh
-
