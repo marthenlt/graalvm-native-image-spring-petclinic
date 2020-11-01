@@ -10,9 +10,12 @@ before_install:
   - tar zxf graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
   - cd graalvm-ce-java11-20.2.0
   - export GRAALVM_HOME=${pwd}
+  - echo $GRAALVM_HOME
   - export JAVA_HOME=$GRAALVM_HOME
   - export PATH=$PATH:$JAVA_HOME/bin
-  - gu install native-image
+  - echo $PATH
+  - java -version
+#  - gu install native-image
 
 script:
   - ./build-on-docker.sh
