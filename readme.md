@@ -185,6 +185,18 @@ cd kubernetes
 ./deploy-petclinic-native-as-knative-service.sh
 ```
 
+## CI/CD Pipelines
+
+I have created CI/CD pipelines to run this repo inside your CI tools (I know that someday people will ask for it, so before you guys ask for it I've already provided it for you :-) .. so you guys can easily integrate it with your favorite CI tools).
+
+As there are too many CI tools these days, I only picked up a few which I think mainstream, they are:
+
+1. Jenkins 
+2. Travis CI 
+3. Tekton
+
+I might incorporate other CI tools in the future e.g. Spinnaker and Github Action.
+
 
 Enjoy the lightning speed start up time of native image Petclinic :-)
 
