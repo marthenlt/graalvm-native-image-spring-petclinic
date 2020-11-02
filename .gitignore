@@ -1,4 +1,5 @@
 demo-rundown
+kubernetes/tekton/docker-hub-credential-real.yaml
 target/*
 .settings/*
 .classpath

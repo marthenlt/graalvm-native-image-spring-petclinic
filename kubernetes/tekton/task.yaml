@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: tekton-task-aot-compile-petclinic-from-github-and-push-it-to-dockerhub
+  name: tekton-task-aot-compile-petclinic
 spec:
   inputs:
     resources:
