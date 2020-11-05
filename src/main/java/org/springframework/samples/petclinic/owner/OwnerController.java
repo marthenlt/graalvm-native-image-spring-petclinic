@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.owner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.visit.VisitRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author Juergen Hoeller
@@ -48,9 +50,12 @@ class OwnerController {
 
 	private VisitRepository visits;
 
-	public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
+	private PetRepository petRepository;
+
+	public OwnerController(OwnerRepository clinicService, VisitRepository visits, PetRepository petRepository) {
 		this.owners = clinicService;
 		this.visits = visits;
+		this.petRepository = petRepository;
 	}
 
 	@InitBinder
@@ -135,6 +140,34 @@ class OwnerController {
 		System.out.println(localhost);
 		model.put("servedby", localhost);
 		return "faas/empty";
+	}
+
+	@GetMapping("/populate")
+	public String populate(Map<String, Object> model) {
+		String info = "Successfully populating 1K owners and 1K pets data..";
+		for (int i=0; i < 1_000; i++) {
+			Owner owner = new Owner();
+			owner.setFirstName("firstname-" + i);
+			owner.setLastName("lastname-" + i);
+			owner.setAddress("address-" +i);
+			owner.setCity("city-" +i);
+			owner.setTelephone(String.valueOf(i));
+			owners.save(owner);
+
+			List<PetType> petTypes = petRepository.findPetTypes();
+			Random random = new Random();
+			PetType petType = petTypes.get(random.nextInt(petTypes.size()-1));
+
+			Pet pet = new Pet();
+			pet.setName("pet-" + i);
+			pet.setBirthDate(LocalDate.of(2020, 1, 8));
+			pet.setOwner(owner);
+			pet.setType(petType);
+			petRepository.save(pet);
+		}
+		model.put("info", info);
+		System.out.println(info);
+		return "faas/info";
 	}
 
 	@PostMapping("/owners/{ownerId}/edit")
