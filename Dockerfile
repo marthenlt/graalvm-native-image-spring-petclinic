@@ -3,7 +3,7 @@ MAINTAINER Marthen Luther <marthen.luther@oracle.com>
 ENV MYSQL_HOST=mysql \
     DO_NOT_INITIALIZE=never \
     ORACLE_HOST=oracle \
-    VERSION=v0.8
+    VERSION=v0.11
 COPY target/petclinic-jpa .
 EXPOSE 8080
 ENTRYPOINT ["/petclinic-jpa"]

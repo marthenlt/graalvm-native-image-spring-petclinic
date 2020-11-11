@@ -139,7 +139,7 @@ class OwnerController {
 			e.printStackTrace();
 		}
 		String color = System.getenv("COLOR");
-		System.out.println("==> within /doscale ==> version: [" + version + "]  ;  served by: [" + hostname + "]  ;  color: [" + color + "]");
+		System.out.println("==> within /doscale ==> version:" + version + "   ;   served by:" + hostname + "   ;   color:" + color);
 		model.put("version", version);
 		model.put("color", color);
 		model.put("hostname", hostname);
