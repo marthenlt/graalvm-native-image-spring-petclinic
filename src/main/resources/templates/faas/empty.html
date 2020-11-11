@@ -2,14 +2,27 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <body>
 <div th:style="'background:' + ${color}">
-    <h1>
-        <p style="color:white">App info</p>
-        <br/>
-    </h1>
     <h2>
-        <p style="color:white" th:text="'version: ' + ${version} "/>
-        <p style="color:white" th:text="'color: ' + ${color} "/>
-        <p style="color:white" th:text="'served by host: ' + ${hostname} "/>
+        <p style="color:yellow">App info</p>
+        <br/>
+
+        <table border="0" style="color:white;" cellpadding = "5" cellspacing = "5">
+            <tr>
+                <td>version</td>
+                <td>:</td>
+                <td><p th:text="${version}"/></td>
+            </tr>
+            <tr>
+                <td>served by host</td>
+                <td>:</td>
+                <td><p th:text="${hostname}"/></td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>:</td>
+                <td><p th:text="${color}"/></td>
+            </tr>
+        </table>
     </h2>
 </div>
 </body>
