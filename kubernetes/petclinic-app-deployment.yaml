@@ -29,11 +29,11 @@ spec:
     spec:
       containers:
         - name: petclinic-graalvm-native-image
-          image: marthenl/petclinic-mysql-native-image:0.11
+          image: marthenl/petclinic-mysql-native-image:0.12
           env:
             - name: COLOR
               value: "blue"
             - name: VERSION
-              value: "v0.11"
+              value: "v0.12"
           ports:
             - containerPort: 8080
