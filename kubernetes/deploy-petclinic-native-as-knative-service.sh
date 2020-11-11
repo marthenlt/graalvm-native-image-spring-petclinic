@@ -7,4 +7,4 @@ kubectl apply -f mysql-pv.yaml
 sleep 2
 kubectl apply -f mysql-deployment.yaml
 sleep 45
-kubectl apply -f istio-minimal-operator.yaml
+kubectl apply -f knative-serving.yaml
