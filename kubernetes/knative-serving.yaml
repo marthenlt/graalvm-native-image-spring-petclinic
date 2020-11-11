@@ -22,8 +22,10 @@ spec:
         #autoscaling.knative.dev/metric: cpu
     spec:
       containers:
-        - image: marthenl/petclinic-mysql-native-image:0.8
+        - image: marthenl/petclinic-mysql-native-image:0.10
           env:
           - name: VERSION
-            value: "v0.8"
+            value: "v0.10"
+          - name: COLOR
+            value: "blue"
 ---

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" >
-  <body>
-  <p th:text="${servedby}"/>
-  </body>
+<html xmlns:th="https://www.thymeleaf.org">
+<body>
+<div th:style="'background:' + ${color}">
+    <h1>
+        <p style="color:white">App info</p>
+        <br/>
+    </h1>
+    <h2>
+        <p style="color:white" th:text="'version: [' + ${version} + ']'"/>
+        <p style="color:white" th:text="'color: [' + ${color} + ']'"/>
+        <p style="color:white" th:text="'served by host: [' + ${hostname} + ']'"/>
+    </h2>
+</div>
+</body>
 </html>

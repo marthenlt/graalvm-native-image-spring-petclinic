@@ -131,14 +131,18 @@ class OwnerController {
 
 	@GetMapping("/doscale")
 	public String scaleItUp(Map<String, Object> model) {
-		String localhost = "(VERSION: " + System.getenv("VERSION") + ")  ;  served from: ";
+		String version = System.getenv("VERSION");
+		String hostname = "";
 		try {
-			localhost += InetAddress.getLocalHost().getHostName();
+			hostname += InetAddress.getLocalHost().getHostName();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		System.out.println(localhost);
-		model.put("servedby", localhost);
+		String color = System.getenv("COLOR");
+		System.out.println("==> within /doscale ==> version: [" + version + "]  ;  served by: [" + hostname + "]  ;  color: [" + color + "]");
+		model.put("version", version);
+		model.put("color", color);
+		model.put("hostname", hostname);
 		return "faas/empty";
 	}
 
