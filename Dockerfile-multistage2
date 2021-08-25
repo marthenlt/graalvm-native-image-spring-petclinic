@@ -1,0 +1,17 @@
+FROM ghcr.io/graalvm/graalvm-ce:java8-20 as graalvm
+RUN gu install native-image \
+    && mkdir -p /home/app 
+COPY . /home/app/petclinic
+WORKDIR /home/app/petclinic
+RUN ./compile.sh
+
+FROM frolvlad/alpine-glibc:alpine-3.12
+ENV MYSQL_HOST=mysql \
+    VERSION=v0.12 \
+    DO_NOT_INITIALIZE=never \
+    ORACLE_HOST=oracle
+RUN apk -U upgrade \
+        && apk add libstdc++
+EXPOSE 8080
+COPY --from=graalvm /home/app/petclinic/target/petclinic-jpa .
+ENTRYPOINT ["/petclinic-jpa"]
