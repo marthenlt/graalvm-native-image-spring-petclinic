@@ -27,10 +27,7 @@ CP=BOOT-INF/classes:$LIBPATH
 GRAALVM_VERSION=`native-image --version`
 echo "Compiling $ARTIFACT with $GRAALVM_VERSION"
 { time native-image \
-<<<<<<< HEAD
-=======
   -H:+StaticExecutableWithDynamicLibC \
->>>>>>> 0e81fc875d7bc63c8e28034973f56a4742359dfa
   -H:+ReportExceptionStackTraces \
   --enable-all-security-services \
   -H:IncludeResourceBundles=oracle.net.jdbc.nl.mesg.NLSR,oracle.net.mesg.Message \
