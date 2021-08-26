@@ -3,7 +3,7 @@ RUN gu install native-image \
     && mkdir -p /home/app 
 COPY . /home/app/petclinic
 WORKDIR /home/app/petclinic
-RUN ./compile.sh
+RUN ./compile-for-container.sh
 
 FROM frolvlad/alpine-glibc:alpine-3.12
 ENV MYSQL_HOST=mysql \
