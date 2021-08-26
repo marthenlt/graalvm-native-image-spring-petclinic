@@ -35,5 +35,7 @@ spec:
               value: "blue"
             - name: VERSION
               value: "v0.12"
+            - name: MYSQL_HOST
+              value: "mysql-external-service"
           ports:
             - containerPort: 8080

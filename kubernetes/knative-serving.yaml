@@ -28,4 +28,6 @@ spec:
             value: "v0.12"
           - name: COLOR
             value: "blue"
+          - name: MYSQL_HOST
+            value: "mysql-external-service"
 ---
