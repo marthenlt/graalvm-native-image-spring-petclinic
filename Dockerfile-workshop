@@ -1,10 +1,11 @@
-# FROM oracle/graalvm-ce:20.2.0-java8
-FROM ghcr.io/graalvm/graalvm-ce:java8-20.3.3
+FROM frolvlad/alpine-glibc:alpine-3.12
 MAINTAINER Marthen Luther <marthen.luther@oracle.com>
 ENV MYSQL_HOST=mysql \
     DO_NOT_INITIALIZE=never \
     ORACLE_HOST=oracle \
-    VERSION=v0.11
+    VERSION=v0.12
+RUN apk -U upgrade \
+        && apk add libstdc++
 COPY target/petclinic-jpa .
 EXPOSE 8080
 ENTRYPOINT ["/petclinic-jpa"]

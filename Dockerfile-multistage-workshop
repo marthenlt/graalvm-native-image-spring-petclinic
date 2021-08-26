@@ -1,16 +1,8 @@
-# FROM oracle/graalvm-ce:20.2.0-java8 as graalvm
-FROM ghcr.io/graalvm/graalvm-ce:java8-20 as graalvm
-#RUN yum install wget -y \
-#    &&  gu install native-image \
-#    && mkdir -p /home/app
+FROM ghcr.io/graalvm/graalvm-ce:java8-20.3.3 as graalvm
 RUN gu install native-image \
     && mkdir -p /home/app 
 COPY . /home/app/petclinic
 WORKDIR /home/app/petclinic
-# RUN wget https://apachemirror.sg.wuchna.com/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz \
-#    && tar -xzf apache-maven-3.6.3-bin.tar.gz \
-#    && export PATH=$PATH:apache-maven-3.6.3/bin \
-#    && ./compile.sh
 RUN ./compile.sh
 
 FROM alpine:latest
@@ -20,8 +12,8 @@ ENV MYSQL_HOST=mysql \
     DO_NOT_INITIALIZE=never \
     ORACLE_HOST=oracle \
     GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc \
-    GLIBC_VERSION=2.29-r0 \
-#    GLIBC_VERSION=2.33-r0 \
+#    GLIBC_VERSION=2.29-r0 \
+    GLIBC_VERSION=2.33-r0 \
     LANG=C.UTF-8
 RUN apk -U upgrade \
         && apk add libstdc++ bash curl \
