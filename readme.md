@@ -301,6 +301,8 @@ Thanks,
 
 Marthen Luther
 
-(16 October 2020) - First commit only support MySQL database.
 
-(27 October 2020) - Updated to include Oracle and H2 databases.
+History of changes:
+- (16 October 2020) - First commit only support MySQL database.
+- (27 October 2020) - Updated to include Oracle and H2 databases.
+- (4 April 2022) - Add JFR demo.
