@@ -201,6 +201,102 @@ I might incorporate other CI tools in the future e.g. Spinnaker and Github Actio
 Enjoy the lightning speed start up time of native image Petclinic :-)
 
 
+## JFR Demo
+
+### What is JFR?
+
+JDK Flight Recorder (JFR) is a tool for collecting diagnostic and profiling data about a running Java application. 
+
+It is integrated into the Java Virtual Machine (JVM) and causes almost no performance overhead, so it can be used even in heavily loaded production environments.
+
+### What is JFR used for?
+
+1. Performance analysis
+   - Method Profiling
+   - Garbage Collection (GC)
+2. Detecting anomalies
+   - Memory leak
+   - High latency / bottleneck 
+3. Configure an ideal JVM options in the environment
+   - -Xms ; -Xmx ; -Xss
+
+## Memory leak simulation
+
+This application has a memory leak simulation by running the application via its bash script `run-in-jfr.sh` which is by default will enable JFR continous recording and you need to hook up the JMX Bean from JDK Mission Control (JMC) and start the JFR recording yourself. If not that you can use the Time Fixed recording option in the bash script.
+
+Once the application is running, invoke `jfr-memory-leak-test.sh` script. This script will hit the following webservice endpoint.
+
+```java
+public static List<Double> memoryLeakList = new ArrayList<>();
+
+@GetMapping("/mem-leak-operation/{size}")
+public String memLeakOperation(@PathVariable("size") int size, Model model) {
+    long startTime = System.currentTimeMillis();
+    int sizeInThousands = size * 1_000;
+    for (int i = 0; i < size; i++) {
+        memoryLeakList.add(Math.random());
+    }
+    long curTime = System.currentTimeMillis();
+    long duration = (curTime - startTime)/1000;
+    model.addAttribute("info", "Memory leak test -- Static array of list with size of " + sizeInThousands + " have been created. Duration : " + duration);
+    return "faas/info";
+}
+```
+
+Upon completion, do take the JFR file and don't forget to restart the application to clear the live objects from the heap.  
+
+Now run another script called `jfr-memory-non-leak-test.sh` to simulate the resolution.
+
+### Performance analysis
+
+I have provided 2 different scripts to simulate performance analysis scenario, `jfr-string-append-test.sh` and `jfr-stringbuilder-append-test.sh`.
+
+It is basically to simulate a very common issue of using a plus `+` operator to concetenate strings, as seen from below code snippet.
+
+```java
+	public String stringAppend(int max) {
+		String s = "";
+		for (int i = 0; i < max; i++) {
+			if (s.length() > 0)
+				s += ", ";
+			s += "string";
+		}
+		return s;
+	}
+	public String stringBuilderAppend(int max) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < max; i++) {
+			if (sb.length() > 0)
+				sb.append(", ");
+			sb.append("string");
+		}
+		return sb.toString();
+	}
+	@GetMapping("/string-append/{size}")
+	public String stringAppendOperation(@PathVariable("size") int size, Model model) {
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		String result = "";
+		result = stringAppend(sizeInThousands);
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "String append with max loop of " + sizeInThousands + " have been created. Duration : " + duration);
+		return "faas/info";
+	}
+	@GetMapping("/stringbuilder-append/{size}")
+	public String stringBuilderAppendOperation(@PathVariable("size") int size, Model model) {
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		String result = "";
+		result = stringBuilderAppend(sizeInThousands);
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "StringBuilder append with max loop of " + sizeInThousands + " have been created. Duration : " + duration);
+		return "faas/info";
+	}
+
+```
+
 Thanks,
 
 Marthen Luther

@@ -238,7 +238,7 @@ class OwnerController {
 		long curTime = System.currentTimeMillis();
 		long duration = (curTime - startTime)/1000;
 		model.addAttribute("info", "Memory leak test -- Static array of list with size of " + sizeInThousands + " have been created. Duration : " + duration);
-		nonMemoryLeakList = null; //clean it..
+		nonMemoryLeakList = null; //once it is not used, we clean it..
 		return "faas/info";
 	}
 
