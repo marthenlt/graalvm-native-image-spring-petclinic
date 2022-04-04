@@ -27,13 +27,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author Juergen Hoeller
@@ -173,6 +171,123 @@ class OwnerController {
 		System.out.println(info);
 		return "faas/info";
 	}
+
+	@GetMapping("/cpu-intensive-operation/{loop}")
+	public String cpuIntensiveOperation(@PathVariable("loop") long loop, Model model) {
+		long startTime = System.currentTimeMillis();
+		long loopInThousands = loop * 1_000;
+		long count = 0;
+		long max = 0;
+		for (long i=3; i<=loopInThousands; i++) {
+			boolean isPrime = true;
+			for (long j=2; j<=i/2 && isPrime; j++) {
+				isPrime = i % j > 0;
+			}
+			if (isPrime) {
+				count++;
+				max = i;
+			}
+		}
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "Finding max prime number from " + loopInThousands + ", and the result is (max): " + max + "  ;  duration: " + duration);
+		return "faas/info";
+	}
+
+	@GetMapping("/mem-intensive-operation/{size}")
+	public String memIntensiveOperation(@PathVariable("size") int size, Model model) {
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		Owner[] owners = null;
+		for (int i = 0; i < 1000; i++) {
+			owners = new Owner[sizeInThousands];
+		}
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "Array of owners with size of " + sizeInThousands + " have been created. Duration : " + duration);
+		return "faas/info";
+	}
+
+	//****************************************
+	//Memory leak use case..
+	//========================================
+	//The problem is global static variable with no/unlimited size
+	public static List<Double> memoryLeakList = new ArrayList<>();
+
+	@GetMapping("/mem-leak-operation/{size}")
+	public String memLeakOperation(@PathVariable("size") int size, Model model) {
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		for (int i = 0; i < size; i++) {
+			memoryLeakList.add(Math.random());
+		}
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "Memory leak test -- Static array of list with size of " + sizeInThousands + " have been created. Duration : " + duration);
+		return "faas/info";
+	}
+	@GetMapping("/mem-non-leak-operation/{size}")
+	public String memNonLeakOperation(@PathVariable("size") int size, Model model) {
+		//The solution is localized non-static variable..
+		List<Double> nonMemoryLeakList = new ArrayList<>();
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		for (int i = 0; i < size; i++) {
+			nonMemoryLeakList.add(Math.random());
+		}
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "Memory leak test -- Static array of list with size of " + sizeInThousands + " have been created. Duration : " + duration);
+		nonMemoryLeakList = null; //clean it..
+		return "faas/info";
+	}
+
+	//****************************************
+	//Method profiling use case..
+	//========================================
+	//The problem is using + operator to concatenate strings
+	public String stringAppend(int max) {
+		String s = "";
+		for (int i = 0; i < max; i++) {
+			if (s.length() > 0)
+				s += ", ";
+			s += "string";
+		}
+		return s;
+	}
+	//The solution is to use StringBuilder.append()
+	public String stringBuilderAppend(int max) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < max; i++) {
+			if (sb.length() > 0)
+				sb.append(", ");
+			sb.append("string");
+		}
+		return sb.toString();
+	}
+	@GetMapping("/string-append/{size}")
+	public String stringAppendOperation(@PathVariable("size") int size, Model model) {
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		String result = "";
+		result = stringAppend(sizeInThousands);
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "String append with max loop of " + sizeInThousands + " have been created. Duration : " + duration);
+		return "faas/info";
+	}
+	@GetMapping("/stringbuilder-append/{size}")
+	public String stringBuilderAppendOperation(@PathVariable("size") int size, Model model) {
+		long startTime = System.currentTimeMillis();
+		int sizeInThousands = size * 1_000;
+		String result = "";
+		result = stringBuilderAppend(sizeInThousands);
+		long curTime = System.currentTimeMillis();
+		long duration = (curTime - startTime)/1000;
+		model.addAttribute("info", "StringBuilder append with max loop of " + sizeInThousands + " have been created. Duration : " + duration);
+		return "faas/info";
+	}
+
 
 	@PostMapping("/owners/{ownerId}/edit")
 	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result,
