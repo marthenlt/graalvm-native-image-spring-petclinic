@@ -220,7 +220,7 @@ It is integrated into the Java Virtual Machine (JVM) and causes almost no perfor
 3. Configure an ideal JVM options in the environment
    - -Xms ; -Xmx ; -Xss
 
-## Memory leak simulation
+#### Memory leak simulation
 
 This application has a memory leak simulation by running the application via its bash script `run-in-jfr.sh` which is by default will enable JFR continous recording and you need to hook up the JMX Bean from JDK Mission Control (JMC) and start the JFR recording yourself. If not that you can use the Time Fixed recording option in the bash script.
 
@@ -247,7 +247,7 @@ Upon completion, do take the JFR file and don't forget to restart the applicatio
 
 Now run another script called `jfr-memory-non-leak-test.sh` to simulate the resolution.
 
-### Performance analysis
+#### Performance analysis
 
 I have provided 2 different scripts to simulate performance analysis scenario, `jfr-string-append-test.sh` and `jfr-stringbuilder-append-test.sh`.
 
@@ -294,8 +294,8 @@ It is basically to simulate a very common issue of using a plus `+` operator to 
 		model.addAttribute("info", "StringBuilder append with max loop of " + sizeInThousands + " have been created. Duration : " + duration);
 		return "faas/info";
 	}
-
 ```
+
 
 Thanks,
 
