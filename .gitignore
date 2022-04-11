@@ -7,6 +7,8 @@ target/*
 .factorypath
 .attach_pid*
 .idea
+.mvn
+.vscode
 *.iml
 /target
 .sts4-cache/
