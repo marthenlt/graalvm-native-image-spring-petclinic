@@ -233,7 +233,7 @@ public static List<Double> memoryLeakList = new ArrayList<>();
 public String memLeakOperation(@PathVariable("size") int size, Model model) {
     long startTime = System.currentTimeMillis();
     int sizeInThousands = size * 1_000;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < sizeInThousands; i++) {
         memoryLeakList.add(Math.random());
     }
     long curTime = System.currentTimeMillis();

@@ -3,7 +3,7 @@ if [[ ! `cat target/native-image/test-output.txt | grep -E "Application run fail
 then
   exit 0
 else 
-  RESPONSE=`curl -s localhost:8080/actuator/health`
+  RESPONSE=`curl -s localhost:8081/actuator/health`
   if [[ "$RESPONSE" == *"UP"* ]]; then
    exit 0
   else

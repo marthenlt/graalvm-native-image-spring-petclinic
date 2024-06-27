@@ -218,7 +218,7 @@ class OwnerController {
 	public String memLeakOperation(@PathVariable("size") int size, Model model) {
 		long startTime = System.currentTimeMillis();
 		int sizeInThousands = size * 1_000;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < sizeInThousands; i++) {
 			memoryLeakList.add(Math.random());
 		}
 		long curTime = System.currentTimeMillis();
@@ -232,12 +232,12 @@ class OwnerController {
 		List<Double> nonMemoryLeakList = new ArrayList<>();
 		long startTime = System.currentTimeMillis();
 		int sizeInThousands = size * 1_000;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < sizeInThousands; i++) {
 			nonMemoryLeakList.add(Math.random());
 		}
 		long curTime = System.currentTimeMillis();
 		long duration = (curTime - startTime)/1000;
-		model.addAttribute("info", "Memory leak test -- Static array of list with size of " + sizeInThousands + " have been created. Duration : " + duration);
+		model.addAttribute("info", "Memory non leak test -- Static array of list with size of " + sizeInThousands + " have been created. Duration : " + duration);
 		nonMemoryLeakList = null; //once it is not used, we clean it..
 		return "faas/info";
 	}
